@@ -45,7 +45,7 @@ const SystemMonitor: React.FC<SystemMonitorProps> = ({ metrics }) => {
                 icon={Cpu} 
                 label="Mémoire Heap" 
                 value={`${(metrics.memoryUsage / 1024 / 1024).toFixed(1)} MB`} 
-                subtext="JS Allocation" 
+                subtext="Allocation JS" 
             />
             <MetricCard 
                 icon={Clock} 

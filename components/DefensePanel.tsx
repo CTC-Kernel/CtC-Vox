@@ -11,6 +11,12 @@ interface DefensePanelProps {
   isLockdown: boolean;
 }
 
+const protocolTypeMap: Record<string, string> = {
+    FIREWALL: 'PARE-FEU',
+    IDS: 'DÉTECTION',
+    PATCH: 'CORRECTIF'
+};
+
 const DefensePanel: React.FC<DefensePanelProps> = ({ threats, onLog, onLockdownToggle, isLockdown }) => {
   const [protocols, setProtocols] = useState<DefenseProtocol[]>([]);
   const [advisory, setAdvisory] = useState<string>("");
@@ -155,8 +161,8 @@ const DefensePanel: React.FC<DefensePanelProps> = ({ threats, onLog, onLockdownT
                    ) : (
                        <div className="flex-1 overflow-y-auto custom-scrollbar space-y-4 pr-2">
                            {advisory && (
-                               <div className="p-4 bg-blue-900/20 border-l-2 border-blue-400 text-sm text-blue-200 leading-relaxed rounded-r">
-                                   <span className="font-bold block mb-1 tracking-wide text-xs uppercase">AVIS STRATÉGIQUE:</span>
+                               <div className="p-4 bg-blue-900/20 border-l-2 border-blue-400 text-sm text-blue-200 leading-relaxed rounded-r shadow-lg">
+                                   <span className="font-bold block mb-1 tracking-wide text-xs uppercase text-blue-400">AVIS STRATÉGIQUE:</span>
                                    {advisory}
                                </div>
                            )}
@@ -169,7 +175,7 @@ const DefensePanel: React.FC<DefensePanelProps> = ({ threats, onLog, onLockdownT
                                                p.type === 'FIREWALL' ? 'border-orange-500 text-orange-500' :
                                                p.type === 'IDS' ? 'border-purple-500 text-purple-500' :
                                                'border-blue-500 text-blue-500'
-                                           }`}>{p.type}</span>
+                                           }`}>{protocolTypeMap[p.type] || p.type}</span>
                                            <span className="text-white font-bold text-sm tracking-tight">{p.title}</span>
                                        </div>
                                        <button 
@@ -180,7 +186,7 @@ const DefensePanel: React.FC<DefensePanelProps> = ({ threats, onLog, onLockdownT
                                        </button>
                                    </div>
                                    <p className="text-gray-400 text-xs mb-3 font-mono">{p.description}</p>
-                                   <div className="bg-black border border-gray-800 p-3 rounded relative group">
+                                   <div className="bg-black border border-gray-800 p-3 rounded relative group shadow-inner">
                                        <code className="text-green-500 text-xs font-mono break-all">{p.command}</code>
                                    </div>
                                </div>

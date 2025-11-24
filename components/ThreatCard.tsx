@@ -8,6 +8,13 @@ interface ThreatCardProps {
   onSelect: () => void;
 }
 
+const severityMap: Record<string, string> = {
+  LOW: 'FAIBLE',
+  MEDIUM: 'MOYEN',
+  HIGH: 'ÉLEVÉ',
+  CRITICAL: 'CRITIQUE'
+};
+
 const ThreatCard: React.FC<ThreatCardProps> = ({ threat, isSelected, onSelect }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   
@@ -33,7 +40,7 @@ const ThreatCard: React.FC<ThreatCardProps> = ({ threat, isSelected, onSelect })
       ref={cardRef}
       onClick={onSelect}
       className={`
-        relative p-4 mb-3 cursor-pointer transition-all duration-300
+        relative p-4 mb-3 cursor-pointer transition-all duration-300 rounded-sm
         ${glowClass} 
         backdrop-blur-sm group
       `}
@@ -47,20 +54,20 @@ const ThreatCard: React.FC<ThreatCardProps> = ({ threat, isSelected, onSelect })
       )}
 
       <div className="flex justify-between items-start mb-2">
-        <h3 className="text-md font-bold text-white flex items-center gap-2 tracking-wide">
+        <h3 className="text-sm font-bold text-white flex items-center gap-2 tracking-tight">
           {isCritical ? <ShieldAlert className="text-cyber-alert animate-pulse" size={16} /> : <Activity className="text-cyber" size={16} />}
           {threat.name}
         </h3>
-        <span className={`text-[10px] px-1.5 py-0.5 rounded font-mono border ${
+        <span className={`text-[9px] px-1.5 py-0.5 rounded font-bold tracking-wider border ${
           isCritical
             ? 'border-cyber-alert text-cyber-alert' 
             : 'border-cyber text-cyber'
         }`}>
-          {threat.severity}
+          {severityMap[threat.severity] || threat.severity}
         </span>
       </div>
       
-      <p className="text-gray-400 text-xs mb-3 font-mono leading-relaxed line-clamp-3 group-hover:text-gray-300 transition-colors">
+      <p className="text-gray-400 text-xs mb-3 font-sans leading-relaxed line-clamp-3 group-hover:text-gray-300 transition-colors font-medium">
         {threat.description}
       </p>
 
@@ -86,7 +93,7 @@ const ThreatCard: React.FC<ThreatCardProps> = ({ threat, isSelected, onSelect })
       {/* Animated Scanline for selected card */}
       {isSelected && (
         <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-sm">
-            <div className="w-full h-[2px] bg-white/20 shadow-[0_0_10px_rgba(255,255,255,0.5)] animate-[scanline_2s_linear_infinite]"></div>
+            <div className="w-full h-[1px] bg-white/30 shadow-[0_0_10px_rgba(255,255,255,0.5)] animate-[scanline_2s_linear_infinite]"></div>
         </div>
       )}
     </div>
