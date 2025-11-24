@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cyber Threat Consulting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cyber: {
+                DEFAULT: '#00f3ff',
+                dim: 'rgba(0, 243, 255, 0.1)',
+                glow: 'rgba(0, 243, 255, 0.5)',
+                dark: '#020b14',
+                panel: 'rgba(2, 11, 20, 0.85)',
+                alert: '#ff2a6d'
+              }
+            },
+            fontFamily: {
+              // Stack prioritaire Apple System
+              sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Text', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+              mono: ['SF Mono', 'Menlo', 'Monaco', 'Courier New', 'monospace'],
+            },
+            letterSpacing: {
+              tighter: '-0.05em',
+              tight: '-0.025em',
+              normal: '0em',
+              wide: '0.025em',
+              wider: '0.05em',
+              widest: '0.1em',
+            },
+            animation: {
+              'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'scanline': 'scanline 8s linear infinite',
+            },
+            keyframes: {
+              scanline: {
+                '0%': { transform: 'translateY(-100%)' },
+                '100%': { transform: 'translateY(100%)' }
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #000;
+        color: #fff;
+        overflow: hidden;
+        /* Rendu de police Apple natif sur fond sombre */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+      .cyber-glass {
+        background: rgba(2, 11, 20, 0.7);
+        backdrop-filter: blur(20px); /* Blur plus prononcé style macOS */
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(0, 243, 255, 0.15);
+        box-shadow: 0 0 15px rgba(0, 243, 255, 0.05);
+      }
+      .cyber-text-glow {
+        text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+      }
+      .scan-overlay {
+        background: linear-gradient(to bottom, transparent 50%, rgba(0, 243, 255, 0.02) 51%);
+        background-size: 100% 4px;
+        pointer-events: none;
+      }
+      /* Scrollbar plus fine style mobile/mac */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(0, 243, 255, 0.2);
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(0, 243, 255, 0.4);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "three": "https://aistudiocdn.com/three@^0.181.2",
+    "@react-three/drei": "https://aistudiocdn.com/@react-three/drei@^10.7.7",
+    "uuid": "https://aistudiocdn.com/uuid@^13.0.0",
+    "@react-three/fiber": "https://aistudiocdn.com/@react-three/fiber@^9.4.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <div class="fixed inset-0 pointer-events-none scan-overlay z-50"></div>
+  </body>
+</html>
